@@ -1,0 +1,511 @@
+# Apparantly, you can retrieve sample .fvwmrc's from 
+# ftp://ftp.best.com/pub/tdgilman/Fvwmrcs
+# you can also submit your favourite .fvwmrc to
+#	tdgilman@best.com 
+# if you want to.
+
+###########
+#  ____________________________
+# |   _________________________)
+# |  |__  _  _  _    _  
+# |   __|( \/ )( \/\/ )/\/\
+# |  |    \  /  \    //    \
+# |__|     \/    \/\/(_/\/\_)
+#
+# My personal .fvwm2rc file
+#
+
+
+# My variables
+
+
+SetEnv PATH $[HOME]/bin:/usr/sbin:/usr/local/bin:/usr/bin:/usr/games
+SetEnv BROWSER firefox
+SetEnv WWW_HOME https://www.manini.cloud/
+SetEnv MAILER thunderbird
+SetEnv TERMINAL xterm
+SetEnv EDITOR "emacs -nw"
+
+
+######################## Initialization Functions #############################
+AddToFunc InitOrRestart	 	"I" Module FvwmPager 0 0
++				"I" Exec synclient HorizTwoFingerScroll=1 VertTwoFingerScroll=1 VertEdgeScroll=0 TapButton3=2
+#+				"I" Exec python $[HOME]/python/joystickd.py
++				"I" Exec killall -TERM nm-applet xscreensaver gnome-screensaver 
++				"I" Exec xscreensaver&
++				"I" Exec bash -c '( ( [ $HOSTNAME = gatto ] &&  echo -e "Xcursor.theme: Adwaita\nXcursor.size: 40") ; cat $HOME/.Xdefaults ) | xrdb'
++				"I" Module FvwmBanner
+
+
+
+AddToFunc InitFunction		"I" Exec test -f $[HOME]/.fvwm/Pavillon_royal_de_France1080.png && fvwm-root $[HOME]/.fvwm/Pavillon_royal_de_France1080.png
++				"I" Exec upower
+#+				"I" Exec start-pulseaudio-x11
++				"I" Exec batt_check.sh
++				"I" Exec gpsd udp://*:9803
+#+				"I" PipeRead 'echo -n "SetEnv "; gpg-agent --daemon|sed "s/; export GPG_AGENT_INFO;//g"'
++				"I" InitOrRestart
+
+
+AddToFunc RestartFunction	"I" InitOrRestart
+
+
+AddToFunc ConnectMonitor	"I" Exec xrandr --output $0 --auto $1 $2
++				"I" Restart
+
+AddToFunc DisconnectMonitor	"I" Exec xrandr --output $0 --off
++				"I" Restart
+
+#########################################
+
+
+EdgeResistance 1
+#EdgeResistance 250 10
+#WindowFont		-adobe-courier-bold-r-normal--20-------
+IconFont		-adobe-courier-bold-r-normal--10-------
+EdgeScroll 100 100
+
+#ModulePath /usr/lib/fvwm/2.5.12/
+#PixmapPath /usr/include/X11/pixmaps/
+#IconPath   /usr/X11R6/include/X11/bitmaps/
+
+# basic settings
+DeskTopSize 4x3
+ClickTime 750
+OpaqueMoveSize 50
+
+Style "*" Color Black/White
+#Colorset 11 TiledPixmap /usr/share/apps/ksplash/Themes/debian-moreblue-default/splash_top.png
+#Colorset 11 Pixmap bar.png
+
+# basic colors
+HilightColor White PaleVioletRed
+# old styled:
+#MenuStyle White NavyBlue Grey50 10x20 fvwm
+# fancy colors and gradients:
+MenuStyle * Animation
+#MenuStyle * MenuFace White
+#DGradient 128 2 grey22 60 DeepSkyBlue4 40 black, Animation
+MenuStyle * Foreground White
+MenuStyle * BackGround Darkblue
+MenuStyle * Font 9x15
+*FvwmScrollBack Grey50
+*FvwmScrollFore Green
+
+
+ColormapFocus FollowsMouse
+
+Style "*"	    EdgeMoveDelay 1, EdgeMoveResistance 1
+Style "*"           BorderWidth 4, HandleWidth 4
+Style "*"           Icon unknown1.xpm, Color Black/SteelBlue3
+Style "*"           MinOverlapPlacement
+Style "*"           MWMFunctions,MWMDecor,HintOverride
+Style "*"           DecorateTransient,IconBox -50 -450 -1 -200
+Style *		    !Borders,NoTitle
+Style "Fvwm*"       Sticky
+Style "Fvwm*"       BorderWidth 0,CirculateSkipIcon
+Style "FvwmPager"   NoTitle, NoHandles,!Borders, Sticky, WindowListSkip
+Style "FvwmButtons" NoTitle, NoHandles, Sticky 
+#, WindowListSkip
+Style "FvwmButtons" BorderWidth 0, CirculateSkip
+Style "FvwmButtons" Icon toolbox.xpm,ClickToFocus
+#Style "FvwmTalk"    Title
+Style "FvwmBanner"  NoTitle
+Style "*lock"       NoTitle, NoHandles, WindowListSkip
+#Style "*lock"	    RandomPlacement, Sticky
+Style "rxvt"        Icon  term.xpm,SloppyFocus,IconBox  -50 -350 -1 -100
+Style "XTerm"       Icon xterm.xpm,IconBox -50 -350 -1 -100
+Style "XTerm"       Color Black/SteelBlue3,MWMBorder,MWMButtons
+#Style "XTerm"	    Color Green,MWMBorder,MWMButtons
+Style "Appointment" Icon datebook.xpm, NoButton 2, NoButton 4,ClickToFocus
+Style "xcalc"       Icon xcalc.xpm, RandomPlacement
+Style "dtcalc"	    Icon xcalc.xpm, RandomPlacement
+Style "xmh"         Icon mail1.xpm, NoIconTitle,StickyIcon
+Style "xmh"	    RandomPlacement, StartsOnDesk 2, NoButton 2
+Style "xman"	    Icon xman.xpm,RandomPlacement,ClickToFocus
+Style "xvgr"	    Icon graphs.xpm,RandomPlacement,ClickToFocus
+Style "Mozilla"		NoPPosition
+#Style "*Iceweasel"  NoSticky
+#CursorStyle ROOT    /home/davide/.fvwm/pointer.png 16 16
+#CursorStyle TITLE   /home/davide/.fvwm/pointer.png 16 16
+
+
+#########################################
+# Keybindings
+
+# Moving in desktop
+
+Key Left	A	4	Scroll -100 0
+Key Right	A	4	Scroll +100 +0
+Key Up		A	4	Scroll +0   -100
+Key Down	A	4	Scroll +0   +100
+Key Left	A	C4	Scroll -4 +0
+Key Right	A	C4	Scroll +4 +0
+Key Up		A	C4	Scroll +0   -4
+Key Down	A	C4	Scroll +0   +4
+
+
+# Fake Mouse
+
+Key Left	A	SC4	CursorMove -1 0
+Key Right	A	SC4	CursorMove +1 +0
+Key Up		A	SC4	CursorMove +0   -1
+Key Down	A	SC4	CursorMove +0   +1
+Key Left	A	S4	CursorMove -10 +0
+Key Right	A	S4	CursorMove +10 +0
+Key Up		A	S4	CursorMove +0   -10
+Key Down	A	S4	CursorMove +0   +10
+
+Key 1		A	S4	FakeClick depth 0 press 1 wait 250 release 1
+Key 2		A	S4	FakeClick depth 0 press 2 wait 250 release 2
+Key 3		A	S4	FakeClick depth 0 press 3 wait 250 release 3
+Key 4		A	S4	FakeClick depth 0 press 4 press 4 
+Key 5		A	S4	FakeClick depth 0 press 5 press 5 
+
+
+# Audio and multimedia
+
+Key XF86AudioRaiseVolume A N	Exec amixer set Master 5%+
+Key XF86AudioLowerVolume A N	Exec amixer set Master 5%-
+Key XF86AudioMute A	 N	Exec amixer set Master toggle
+
+# Brightness (to be improved)
+
+#PipeRead ' ( xbacklight > /dev/null || echo -ne "Key XF86MonBrightnessUp A N	Exec xbacklight +10\nKey XF86MonBrightnessDown A N	Exec xbacklight -10\n" ) || echo -ne "Key XF86MonBrightnessUp A N	Exec xbacklight +10\nKey XF86MonBrightnessDown A N	Exec xbacklight -10\n" '
+
+Key XF86MonBrightnessUp A N	Exec brightnessctl s 10%+
+Key XF86MonBrightnessDown A N	Exec brightnessctl s 10%-
+
+#Key XF86MonBrightnessUp A N	Exec xbacklight +10
+#Key XF86MonBrightnessDown A N	Exec xbacklight -10
+
+Key Space	A	4	Exec quodlibet --play-pause
+Key KP_Add	A	4	Exec quodlibet --seek +0:10
+Key KP_Subtract	A	4	Exec quodlibet --seek -0:10
+Key Prior	A	4	Exec quodlibet --force-previous
+Key Next	A	4	Exec quodlibet --next
+
+Key Space	A	4	Exec quodlibet --play-pause
+Key KP_Add	A	4	Exec quodlibet --seek +0:10
+Key KP_Subtract	A	4	Exec quodlibet --seek -0:10
+Key Prior	A	4	Exec quodlibet --force-previous
+Key Next	A	4	Exec quodlibet --next
+
+# Report bug to Quodlibet developpers
+#Key XF86AudioPause A	N	Exec quodlibet --play-pause || echo next|netcat -U /tmp/vlc.sock
+
+
+# Screensaver start
+
+Key Escape	A	4	Exec xscreensaver& xscreensaver-command -lock
+
+
+# Take a screenshot
+#Key F12	 	A	4	Exec screenshot.sh --time 0
+
+Key b	A	4	Exec notify-send -t 2000 "`acpi -e`"
+Key t	A	4	Exec notify-send -t 2000 "`date`"
+Key u	A	4	Exec notify-send -t 2000 "`free -h`"
+
+# What a mess!
+PipeRead 'test $HOSTNAME = asd && echo Exec notify-send -t 2000 "`sensors acpitz-virtual-0|grep temp`" || echo Exec notify-send -t 2000 "`sensors pch_cannonlake-virtual-0|grep temp`"
+#Key h	A	4	Exec notify-send -t 2000 "`sensors acpitz-virtual-0|grep temp`"
+Key m	A	4	Menu BasicMenu Nop
+
+# Window Management
+
+Key F1	A	M	Raise
+Key F2	A	M	Lower
+Key F3	A	M	Maximize 100 100
+Key F4	A	M	Close
+Key F5	A	M	Iconify
+Key F6	A	M	Resize
+Key F7	A	M	Move-or-Raise
+
+#Key F1	A	4	Raise
+#Key F2	A	4	Lower
+#Key F3	A	4	Maximize 100 100
+#Key F4	A	4	Close
+#Key F5	A	4	Iconify
+#Key F6	A	4	Resize
+#Key F7	A	4	Move-or-Raise
+
+Key w	A	4	North
+Key a	A	4	West
+Key s	A	4	South
+Key d	A	4	East
+
+#Key Tab A	4	WindowList
+
+
+
+
+########################Menus ########################################
+
+#Read /etc/X11/fvwm/menudefs.hook
+PipeRead 'fvwm-menu-desktop --title Xsessions --name Xsessions --dir /usr/share/xsessions/'
+#|sed "s/Exec exec/Restart/"'
+
+
+Mouse 1	R	A       Menu BasicMenu Nop
+Mouse 3	R	A	Menu Window-Ops Nop
+Mouse 2	R	A	Menu BasicMenu Nop
+
+
+DestroyMenu BasicMenu
+AddToMenu BasicMenu	"Fvwm"	Title
+#+			"Debian"	Popup "/Debian"
++ 			"Applications" Popup "FvwmKf5 Applications"
++			"Terminal"	Exec $[TERMINAL] &
+#+			"XTERM"		Exec xterm -ls -sb -sl 1000 -title "XTERM" -fn lucidasanstypewriter-24 &
++			"Browser"	Exec $[BROWSER] &
++			"Mailer"	Exec $[MAILER] &
++			"Editor"	Exec $[TERMINAL] -e "$[EDITOR]" &
++			"Quodlibet"	Exec quodlibet||quodlibet --show-window&
++			"Vlc"		Exec vlc
++			"Foxtrot GPS"	Exec foxtrotgps &
++			"PulseAudio"	Exec killall pulseaudio; start-pulseaudio-x11
+#+			"Media"		Popup Media
+#+			"xLock"		Exec  exec nice -19 xlock &
++			"terminal"	Exec $[TERMINAL] -fn 8x13
++			"TERMINAL"	Exec $[TERMINAL] -fn 10x20
+#+			"Google Earth"	/usr/bin/google-earth &
++			"Monitor"	Popup Monitor
+#+			"Office"	Popup Office
++			""		Nop		
++			"Quit"		Popup Quit-Verify
++			"Modules"	Popup Module-Popup
++			"Window"	Popup Window-Ops
++			"NoEdgeScroll"	EdgeScroll 0 0
++			"EdgeScroll"	EdgeScroll 100 100
+
+AddToMenu Monitor	"(Re)Connect VGA1 (same as LVDS1)"  ConnectMonitor VGA1 --same-as LVDS1
++			"(Re)Connect VGA1 (right of LVDS1)"  ConnectMonitor VGA1 --right-of LVDS1
++                       "Disconnect VGA1" DisconnectMonitor VGA1
++			"(Re)Connect LVDS1"  ConnectMonitor LVDS1
+
+
+AddToMenu Media		"Media"		Title
++			"rhythmbox"	Exec  /usr/bin/rhythmbox &
++			"totem"		Exec  totem &
++			"XMMS"		Exec  /usr/bin/xmms &
++			"xine"		Exec  /usr/bin/xine &
++			"volume"	Exec  $[TERMINAL] -title "Alsa Mixer" -e alsamixer &
++			"MIDI"		Exec  /usr/bin/rosegarden &
+
+AddToMenu Office	"Office"	Title
++			"Emacs"		Exec $[TERMINAL] -title "Emacs" -e "emacs -nw" &
++			"Emacs22-x"	Exec /usr/bin/emacs-22x &
++			"GIMP"		Exec /usr/bin/gimp &
++			"OpenOffice"	Exec /usr/bin/ooffice &
++			"OOWriter"	Exec /usr/bin/oowriter &
++			"OOMath"	Exec /usr/bin/oomath &
++			"OOCalc"	Exec /usr/bin/oocalc &
+#+			"math"		Exec xterm -ls -sb -sl 1000 -title "Mathematica 5.2 for Linux" -fn 12x24 -e /usr/local/bin/math &
+
+AddToMenu Window-Ops	"Window Ops"	Title		
++			"Move"		Move-or-Raise2
++			"Resize"	Resize-or-Raise2
++			"Raise"		Raise
++			"Lower"		Lower 
++			"(De)Iconify"	Iconify
++			"(Un)Stick"	Stick		
++			"(Un)Maximize"	Maximize-Func
++			""		Nop  
++			"Delete"	Delete	 
++			"Close"		Close
++			"Destroy"	Destroy
++			""		Nop		
++			"Refresh Screen" Refresh		
+
+AddToMenu Window-Ops2	"Alt-F1 Raise"	Raise
++			"Alt-F2 Lower"	Lower
++			"Alt-F3 Maximize"	Maximize 100 100
++			"Alt-F5 (Un)Iconify"	Iconify
++			"Alt-F6 Small Size"	Resize	10 10
++			"Alt-F7 Move"	Move-or-Raise
++			"Alt-F8 Resize"	Resize-or-Raise
++			"(Un)Stick"	Stick
++			""		Nop
++			"Delete"	Delete
++			"Alt-F4 Close"	Close
++			"Destroy"	Destroy
++			""		Nop
++			"ScrollBar"	Module FvwmScroll 2 2	
++			"Print"         PrintFunction
+
+AddToMenu Module-Popup	"Modules"	Title	
+#+			"Button-Bar"	Module	FvwmButtons
++			"Clean-Up"	Module	FvwmClean
++			"Identify"	Module	FvwmIdent
++			"Pager 0"	Module  FvwmPager 0 0
+#+			"Pager 0-2"	Module  FvwmPager 0 2
++			"WinList"	Module  FvwmWinList
++			"Background"	Module  FvwmBacker
++			"IconBox"	Module	FvwmIconBox
++			"IconMan"	Module	FvwmIconMan
++			"Banner"	Module	FvwmBanner
++			"Talk"		Module	FvwmTalk
++			"Console"	Module	FvwmConsole
+
+AddToMenu Xsessions	"Failsafe terminal"	Restart $[TERMINAL]
+
+AddToMenu Quit-Verify	"Really Quit Fvwm?"	Title
++			"Yes, Really Quit"	FvwmScript FvwmScript-ConfirmQuit
++			"Restart"		Restart
++			"Restart Other"		Popup Xsessions
+#+			"Shutdown"		Exec $HOME/.fvwm/shut_down.sh Shutdown
+#+			"Reboot"		Exec $HOME/.fvwm/shut_down.sh Reboot
+#+			"Suspend"		Exec $HOME/.fvwm/shut_down.sh Suspend
+#+			"Hibernate"		Exec $HOME/.fvwm/shut_down.sh Hibernate
+# I Guess systemd is running... 
++			"Poweroff"		Exec zenity --question --text="Poweroff?" && shutdown -P +1
++			"Reboot"		Exec zenity --question --text="Reboot?" && shutdown -r +1
++			"Cancel Poweroff"	Exec shutdown -c
++			"Suspend"		Exec zenity --question --text="Suspend?" && systemctl suspend
++			"Hibernate"		Exec zenity --question --text="Hibernate?" && systemctl hibernate
++			"No, Don't Quit"	Nop	
+
+########################Functions ########################################
+
+AddToFunc North                 "I" Maximize 100 50
+#+				"I" Move 0 0 
+
+AddToFunc South                 "I" Maximize 100 50
++				"I" Move 0 50
+
+AddToFunc East                  "I" Maximize 50 100
++				"I" Move 50 0
+
+AddToFunc West                  "I" Maximize 50 100
+#+				"I" Move 0 0
+
+AddToFunc Move-or-Raise		"I" Raise
++				"I" Move
+#+				"D" Lower
+
+AddToFunc Move-or-Raise2	"M" Raise
++				"M" Move
++				"D" Lower
+
+AddToFunc Maximize-Func		"C" Maximize	 100 100
+#+				"C" Maximize	 0 80
+#+				"M" Maximize	 100 100
+
+AddToFunc Move-or-Iconify	"I" Raise
++				"M" Move
++				"D" Iconify
+
+AddToFunc Resize-or-Raise	"I" Raise
++				"I" Resize
++				"D" Lower
+
+AddToFunc Resize-or-Raise2	"M" Raise
++				"M" Resize
++				"D" Lower
+
+AddToFunc PrintFunction		"I" Raise
++				"I" Exec "xwd -id $w|xwdtopnm>"
+
+
+
+
+########################## Window-Identifier ###############################
+# Just choose colors and a fonts
+*FvwmIdentBack Black
+*FvwmIdentFore White
+*FvwmIdentFont -adobe-courier-medium-r-normal--14-140-75-75-m-90-*-1
+
+########################### Pager #########################################
+*FvwmPagerBack DarkOrchid
+*FvwmPagerFore Black
+*FvwmPagerHilight SkyBlue2
+*FvwmPagerFont -adobe-courier-medium-r-*-*-11-*-*-100-100-*-*-*
+*FvwmPagerGeometry -0-0
+*FvwmPagerLabel 0 Main Desk
+#*FvwmPagerLabel 1 Maker
+#*FvwmPagerLabel 2 Mail
+#*FvwmPagerLabel 3 Matlab
+*FvwmPagerSmallFont -adobe-courier-medium-r-*-*-11-*-*-100-100-*-*-*
+##########################FvwmWinList##################################
+*FvwmWinListBack Grey50
+*FvwmWinListFore Black
+*FvwmWinListFont -adobe-courier-bold-r-*-*-10-*-*-*-*-*-*-*
+*FvwmWinListAction Click1 Iconify -1,Focus
+*FvwmWinListAction Click2 Iconify
+*FvwmWinListAction Click3 Module "FvwmIdent" FvwmIdent
+*FvwmWinListUseSkipList
+*FvwmWinListGeometry +0-1
+
+############################################################
+############################################################
+# Note that icons are shown in the module
+#    only if NoIcon commnand is applied.
+#Style     "*"  NoIcon
+
+############################################################
+*FvwmIconBoxIconBack	Black
+*FvwmIconBoxIconHiFore  SkyBlue
+*FvwmIconBoxIconHiBack  LightSkyBlue
+*FvwmIconBoxBack        CadetBlue
+#*FvwmIconBoxFore       Blue
+*FvwmIconBoxGeometry    5x1+0+0
+*FvwmIconBoxMaxIconSize 64x38
+*FvwmIconBoxFont        -adobe-helvetica-medium-r-*-*-12-*-*-*-*-*-*-*
+*FvwmIconBoxSortIcons   IconName
+*FvwmIconBoxPadding     4
+*FvwmIconBoxLines       10
+*FvwmIconBoxSBWidth     11
+*FvwmIconBoxPlacement   Left Top
+*FvwmIconBoxPixmap      fvwm.xpm
+#*FvwmIconBoxHideSC Horizontal
+*FvwmIconBoxSetWMIconSize
+*FvwmIconBoxHilightFocusWin
+#*FvwmIconBoxResolution          Desk
+*FvwmIconBoxMouse       1       Click           RaiseLower
+*FvwmIconBoxMouse       1       DoubleClick     Iconify
+*FvwmIconBoxMouse       2       Click           Iconify -1, Focus
+*FvwmIconBoxMouse       3       Click           Module FvwmIdent
+*FvwmIconBoxKey         r       RaiseLower
+*FvwmIconBoxKey         space   Iconify
+*FvwmIconBoxKey         d       Close
+*FvwmIconBoxKey         n       Next
+*FvwmIconBoxKey         p       Prev
+*FvwmIconBoxKey         h       Left
+*FvwmIconBoxKey         j       Down
+*FvwmIconBoxKey         k       Up
+*FvwmIconBoxKey         l       Right
+#
+# Icon file specifications
+#
+# Mostly, you don't have to specify icon files, as FvwmIconBox now
+# reads icon files specified in Style commands.
+#
+*FvwmIconBox            "Fvwm*"         -
+
+
+AddToDecor MainDecor
++ TitleStyle Height 24
++ ButtonStyle Reset
++ ButtonStyle 1 MiniIcon -- Flat
++ ButtonStyle 0 -- Flat
++ ButtonStyle 2 Vector 17 20x20@1 30x20@1 50x40@1 70x20@1 80x20@1 80x30@0 60x50@0 80x70@1 80x80@0 70x80@0 50x60@0 30x80@0 20x80@0 20x70@0 40x50@1 20x30@0 20x20@1
+#+ ButtonStyle 2 Active Pixmap /home/davide/.fvwm/quit_button.png
++ ButtonStyle 4 Vector 5 20x20@0 20x80@1 80x80@0 80x20@0 20x20@1 
+#+ ButtonStyle 4 Active Pixmap /home/davide/.fvwm/maximize_button.png
++ ButtonStyle 6 Vector 5 20x90@0 20x65@1 80x65@1 80x90@0 20x90@0
+#+ ButtonStyle 6 Active Pixmap /home/davide/.fvwm/icon_button.png
+
+Style MainStyle \
+      BorderWidth 4, \
+      Font -adobe-helvetica-bold-r-*-*-10-*-*-*-*-*-*-*
+
+
+Style * UseStyle MainStyle
+#Stile Emacs Font -adobe-courier-bold-r-normal--20-------
+
+#Style * UseDecor MainDecor
+
+
+
+
