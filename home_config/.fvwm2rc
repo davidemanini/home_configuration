@@ -41,6 +41,7 @@ AddToFunc InitOrRestart	 	"I" Module FvwmPager 0 0
 AddToFunc InitFunction		"I" Exec test -f $[HOME]/.fvwm/Pavillon_royal_de_France1080.png && fvwm-root $[HOME]/.fvwm/Pavillon_royal_de_France1080.png
 +				"I" Exec upower
 #+				"I" Exec start-pulseaudio-x11
++	  			"I" Exec pacmd load-module module-switch-on-port-available
 +				"I" Exec batt_check.sh
 +				"I" Exec gpsd udp://*:9803
 #+				"I" PipeRead 'echo -n "SetEnv "; gpg-agent --daemon|sed "s/; export GPG_AGENT_INFO;//g"'
