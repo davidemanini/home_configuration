@@ -1,0 +1,10 @@
+[core]
+	editor = emacs -nw
+	autocrlf = input
+[user]
+	name = Davide Manini
+	email = davide@manini.cloud
+[advice]
+	addEmptyPathspec = false
+[init]
+	defaultBranch = master

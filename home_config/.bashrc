@@ -6,8 +6,8 @@
 # for examples
 
 # my programs 
-PATH="~/bin:/usr/sbin:/usr/local/bin:/usr/bin:/usr/games"
-
+#PATH="~/bin:/usr/sbin:/usr/local/bin:/usr/bin:/usr/games"
+PATH="~/bin:$PATH"
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
