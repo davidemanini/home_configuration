@@ -35,7 +35,6 @@ AddToFunc InitOrRestart	 	"I" Module FvwmPager 0 0
 +				"I" Exec killall -TERM nm-applet xscreensaver gnome-screensaver 
 +				"I" Exec xscreensaver&
 +				"I" Exec bash -c '( ( [ $HOSTNAME = gatto ] &&  echo -e "Xcursor.theme: Adwaita\nXcursor.size: 40") ; cat $HOME/.Xdefaults ) | xrdb'
-+				"I" Module FvwmBanner
 
 
 
