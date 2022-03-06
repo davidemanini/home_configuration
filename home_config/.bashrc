@@ -7,7 +7,7 @@
 
 # my programs 
 #PATH="~/bin:/usr/sbin:/usr/local/bin:/usr/bin:/usr/games"
-PATH="~/bin:$PATH"
+PATH="$HOME/bin:/usr/sbin:/sbin:$PATH"
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
