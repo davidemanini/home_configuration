@@ -1,6 +1,7 @@
 [core]
 	editor = emacs -nw
 	autocrlf = input
+	excludesfile = ~/.gitignore
 [user]
 	name = Davide Manini
 	email = davide@manini.cloud
