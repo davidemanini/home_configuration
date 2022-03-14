@@ -192,29 +192,29 @@ fi
 
 
 download_configuration () {
-    config_dir=$(mktemp)
-    mkdir $config_dir
+    config_dir_old=$(mktemp)
+    mkdir $config_dir_old
     # in the future will add the --no-config option.
-    if wget --quiet --quota 50m -m --no-parent -nH -l 10 --no-adjust-extension --cut-dirs=2 -R 'index*' -P $config_dir "$WWW_HOME/public/home_config/"
+    if wget --quiet --quota 50m -m --no-parent -nH -l 10 --no-adjust-extension --cut-dirs=2 -R 'index*' -P $config_dir_old "$WWW_HOME/public/home_config/"
     then
 	echo "Configuration files downloaded:"
-	find $config_dir
+	find $config_dir_old
 	echo "Consider install these files by typing \`install_configuration'"
     else
 	echo "Failed in retriving configuration files."
-	unset $config_dir
+	unset $config_dir_old
 	return 1
     fi
 
 }
 
 check_configuration () {
-    for i in `find $config_dir/`
+    for i in `find $config_dir_old/`
     do
 	
 	if test -f $i
 	then
-	    j=$HOME/`echo $i|sed  s,^$config_dir/,,`
+	    j=$HOME/`echo $i|sed  s,^$config_dir_old/,,`
 	    if test -e $j
 	    then
 		echo diff $i 
@@ -235,10 +235,10 @@ check_configuration () {
 
 
 install_configuration () {
-    rsync  -rlpt -v $config_dir/ $HOME
+    rsync  -rlpt -v $config_dir_old/ $HOME
     date +%s > $HOME/.config/configuration_date
-#    rm -fr $config_dir
-#    unset $config_dir
+#    rm -fr $config_dir_old
+#    unset $config_dir_old
 }
 	
 
@@ -249,4 +249,54 @@ install_configuration () {
 #fi
 
 
+
+
+
+retrive_config_parameters () {
+    if [ -f $config_dir/parameters ]
+    then
+	. $config_dir/parameters
+    fi
+
+
+    if [ "$config_repository" = "" ]
+    then
+	config_repository=origin
+    fi
+    if [ "$config_branch" = "" ]
+    then
+	config_branch=master
+    fi
+
+    if [ -f $config_dir/config_commit ]
+    then
+	config_commit=`cat $config_dir/config_commit`
+    fi
+}
+
+
+
+
+pull_configuration () {
+    retrive_config_parameters
+    git --git-dir=$config_dir/.git fetch $config_repository --all
+}
+
+diff_configuration () {
+    retrive_config_parameters
+    git --git-dir=$config_dir/.git diff $config_commit $config_branch
+}
+
+git_install_configuration () {
+    retrive_config_parameters
+    $config_dir/install.sh $config_branch
+}
+
+
 head -n 1 ~/.bashrc
+
+
+config_dir=$HOME/.home_configuration
+clone_configuration () {
+    git clone ssh://git@ant:~/projects/home_configuration.git $config_dir
+}
