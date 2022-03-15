@@ -298,5 +298,5 @@ head -n 1 ~/.bashrc
 
 config_dir=$HOME/.home_configuration
 clone_configuration () {
-    git clone ssh://git@ant:~/projects/home_configuration.git $config_dir
+    git clone https://github.com/davidemanini/home_configuration $config_dir
 }
