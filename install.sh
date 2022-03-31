@@ -10,7 +10,7 @@ else
     config_branch=$1
 fi
 
-config_tree=`git log $config_branch -1 --pretty=oneline|awk '{print $1}'`
+config_tree=`git --git-dir=$config_dir/.git log $config_branch -1 --pretty=oneline|awk '{print $1}'`
 
 
 
