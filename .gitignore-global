@@ -39,6 +39,12 @@
 *-blx.bib
 *.run.xml
 
+## SyncTeX
+*.synctex.gz
+
+
+
+
 
 ##### C/C++ #####
 *.o
