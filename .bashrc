@@ -68,7 +68,12 @@ alias dir='ls --color=auto --format=vertical'
 alias mv="time mv -i"
 alias cp="time cp -iRp"
 alias scp="time scp -r"
-alias rm="rm -ir"
+if test -x /usr/bin/trash
+then
+    alias rm="trash"
+else
+    alias rm="rm -ir"
+fi
 alias pst='ps -eH --forest'
 alias psu="ps --sort start_time -u $USER"
 alias psa='ps --sort start_time -A'
