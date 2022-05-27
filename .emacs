@@ -5,7 +5,9 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-;(define-key global-map "\C-h" 'backward-kill-word)
+
+;; Ctr-h deletes the previous word
+(define-key global-map "\C-h" 'backward-kill-word)
 
 ;; screen interaction
 
