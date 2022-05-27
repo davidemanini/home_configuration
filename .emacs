@@ -5,7 +5,7 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(define-key global-map "\C-h" 'backward-kill-word)
+;(define-key global-map "\C-h" 'backward-kill-word)
 
 ;; screen interaction
 
@@ -39,12 +39,18 @@
 
 (setq column-number-mode t)
 
+(add-hook 'text-mode-hook 'auto-fill-mode)
 
-(add-hook 'LaTeX-mode-hook
-          'turn-on-auto-fill)
 
-(add-hook 'LaTeX-mode-hook
-          (lambda () (flyspell-mode 1)))
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+;(setq ispell-dictionary "en")
+;(add-hook 'LaTeX-mode-hook 'ispell)
+
+
+(add-hook 'LaTeX-mode-hook 'whitespace-mode)
+
+;(add-hook 'LaTeX-mode-hook
+;          '(lambda () (ispell-change-dictionary "en"))
 
 (add-hook 'LaTeX-mode-hook
           (lambda () (set (make-local-variable 'compile-command)
