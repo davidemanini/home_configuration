@@ -178,3 +178,8 @@
 (setq TeX-view-program-selection '())
 (add-to-list 'TeX-view-program-selection
          '(output-pdf "EvinceDbus"))
+
+
+;; for editing encrypted files
+(require 'epa-file)
+(epa-file-enable)
