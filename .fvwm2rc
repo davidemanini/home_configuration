@@ -30,7 +30,7 @@ SetEnv EDITOR "emacs -nw"
 
 ######################## Initialization Functions #############################
 AddToFunc InitOrRestart	 	"I" Module FvwmPager 0 0
-+				"I" Exec synclient HorizTwoFingerScroll=1 VertTwoFingerScroll=1 VertEdgeScroll=0 TapButton1=1 TapButton2=3 TapButton3=2
++				"I" Exec synclient HorizTwoFingerScroll=1 VertTwoFingerScroll=1 VertEdgeScroll=0 # TapButton1=1 TapButton2=3 TapButton3=2
 #+				"I" Exec python $[HOME]/python/joystickd.py
 +				"I" Exec killall -TERM nm-applet xscreensaver gnome-screensaver 
 +				"I" Exec xscreensaver&
