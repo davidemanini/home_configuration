@@ -9,3 +9,5 @@
 	addEmptyPathspec = false
 [init]
 	defaultBranch = master
+[credential "https://git.overleaf.com"]
+	helper = cache
