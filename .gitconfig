@@ -10,4 +10,6 @@
 [init]
 	defaultBranch = master
 [credential "https://git.overleaf.com"]
-	helper = cache
+	helper = store
+	username = dmanini@sissa.it
+
