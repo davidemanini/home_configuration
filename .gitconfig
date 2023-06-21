@@ -2,6 +2,8 @@
 	editor = emacs -nw
 	autocrlf = input
 	excludesfile = ~/.gitignore-global
+	autoSetupRemote = true
+
 [user]
 	name = Davide Manini
 	email = davide@manini.cloud
