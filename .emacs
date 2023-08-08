@@ -7,7 +7,22 @@
 
 
 ;; Ctr-h deletes the previous word
-(define-key global-map "\C-h" 'backward-kill-word)
+
+(defun delete-word (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (if (use-region-p)
+      (delete-region (region-beginning) (region-end))
+    (delete-region (point) (progn (forward-word arg) (point)))))
+
+(defun backward-delete-word (arg)
+  "Delete characters backward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (delete-word (- arg)))
+
+(define-key global-map "\C-h" 'backward-delete-word)
 
 ;; screen interaction
 
