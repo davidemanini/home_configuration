@@ -30,6 +30,7 @@ SetEnv EDITOR "emacs -nw"
 
 ######################## Initialization Functions #############################
 AddToFunc InitOrRestart	 	"I" Module FvwmPager 0 0
++	  			"I" Module FvwmCommandS
 +				"I" Exec synclient HorizTwoFingerScroll=1 VertTwoFingerScroll=1 VertEdgeScroll=0 # TapButton1=1 TapButton2=3 TapButton3=2
 #+				"I" Exec python $[HOME]/python/joystickd.py
 +				"I" Exec killall -TERM nm-applet xscreensaver gnome-screensaver 
@@ -71,7 +72,7 @@ EdgeScroll 100 100
 #IconPath   /usr/X11R6/include/X11/bitmaps/
 
 # basic settings
-DeskTopSize 4x3
+PipeRead "$[HOME]/.fvwm/desk_size.py"
 ClickTime 750
 OpaqueMoveSize 50
 
@@ -280,9 +281,10 @@ AddToMenu BasicMenu	"Fvwm"	Title
 +			"NoEdgeScroll"	EdgeScroll 0 0
 +			"EdgeScroll"	EdgeScroll 100 100
 
-AddToMenu Monitor	"(Re)Connect VGA1 (same as LVDS1)"  ConnectMonitor VGA1 --same-as LVDS1
-+			"(Re)Connect VGA1 (right of LVDS1)"  ConnectMonitor VGA1 --right-of LVDS1
-+                       "Disconnect VGA1" DisconnectMonitor VGA1
+AddToMenu Monitor	"(Re)Connect HDMI-1 (same as eDP-1)"  ConnectMonitor HDMI-1 --same-as eDP-1
++			"(Re)Connect HDMI-1 (right of eDP-1)"  ConnectMonitor HDMI-1 --right-of eDP-1
++			"(Re)Connect HDMI-1 (above of eDP-1)"  ConnectMonitor HDMI-1 --above eDP-1
++                       "Disconnect HDMI-1" DisconnectMonitor HDMI-1
 +			"(Re)Connect LVDS1"  ConnectMonitor LVDS1
 
 
