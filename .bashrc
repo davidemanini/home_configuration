@@ -117,6 +117,8 @@ alias office2pdf="libreoffice --headless --nologo --convert-to pdf:writer_pdf_Ex
 alias untar='tar -zxvf '
 alias wget='wget --adjust-extension'
 alias python='python3'
+alias latexcleanup='rm *aux *bbl *blg *log *out *pdf *gz *toc'
+alias nmcli='nmcli --ask'
 #alias beatport2mp3="/shared_data/beatport2mp3/beatport2mp3_1.1/gui4linux.py"
 
 # those have sense on mingw
