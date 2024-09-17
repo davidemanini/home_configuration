@@ -11,7 +11,8 @@
 	addEmptyPathspec = false
 [init]
 	defaultBranch = master
+
 [credential "https://git.overleaf.com"]
 	helper = store
-	username = dmanini@sissa.it
+	username = git
 
