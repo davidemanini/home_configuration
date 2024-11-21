@@ -181,17 +181,17 @@ Key XF86MonBrightnessDown A N	Exec brightnessctl s 10%-
 #Key XF86MonBrightnessUp A N	Exec xbacklight +10
 #Key XF86MonBrightnessDown A N	Exec xbacklight -10
 
-Key Space	A	4	Exec quodlibet --play-pause
-Key KP_Add	A	4	Exec quodlibet --seek +0:10
-Key KP_Subtract	A	4	Exec quodlibet --seek -0:10
-Key Prior	A	4	Exec quodlibet --force-previous
-Key Next	A	4	Exec quodlibet --next
+Key Space	A	4	Exec playerctl play-pause
+Key KP_Add	A	4	Exec playerctl position 10+
+Key KP_Subtract	A	4	Exec playerctl position 10-
+Key Prior	A	4	Exec playerctl previous
+Key Next	A	4	Exec playerctl next
 
-Key Space	A	4	Exec quodlibet --play-pause
-Key KP_Add	A	4	Exec quodlibet --seek +0:10
-Key KP_Subtract	A	4	Exec quodlibet --seek -0:10
-Key Prior	A	4	Exec quodlibet --force-previous
-Key Next	A	4	Exec quodlibet --next
+#Key Space	A	4	Exec quodlibet --play-pause
+#Key KP_Add	A	4	Exec quodlibet --seek +0:10
+#Key KP_Subtract	A	4	Exec quodlibet --seek -0:10
+#Key Prior	A	4	Exec quodlibet --force-previous
+#Key Next	A	4	Exec quodlibet --next
 
 # Report bug to Quodlibet developpers
 #Key XF86AudioPause A	N	Exec quodlibet --play-pause || echo next|netcat -U /tmp/vlc.sock
@@ -207,7 +207,7 @@ Key Escape	A	4	Exec xscreensaver& xscreensaver-command -lock
 
 Key b	A	4	Exec notify-send -t 2000 "`acpi -e`"
 Key t	A	4	Exec notify-send -t 2000 "`date`"
-Key u	A	4	Exec notify-send -t 2000 "`free -h`"
+Key u	A	4	Exec notify-send -t 2000 "`free -h; swapon; zramctl`"
 
 # What a mess!
 PipeRead 'test $HOSTNAME = asd && echo Exec notify-send -t 2000 "`sensors acpitz-virtual-0|grep temp`" || echo Exec notify-send -t 2000 "`sensors pch_cannonlake-virtual-0|grep temp`"

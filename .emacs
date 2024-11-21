@@ -72,13 +72,14 @@ With argument, do this that many times."
 (add-hook 'LaTeX-mode-hook
           (lambda () (set (make-local-variable 'compile-command)
                           (let ((file (file-name-nondirectory buffer-file-name)))
-                                      (format "pdflatex -halt-on-error -file-line-error %s" file)
+                                      (format "latexmk" file)
                                       ))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(LaTeX-command "latexmk")
  '(package-selected-packages
    '(nov markdown-mode cmake-mode web-server poker gited chess bluetooth bibretrieve biblio)))
 (custom-set-faces
@@ -198,3 +199,7 @@ With argument, do this that many times."
 ;; for editing encrypted files
 (require 'epa-file)
 (epa-file-enable)
+
+
+;; prevent silly initial splash screen
+(setq inhibit-splash-screen t)
