@@ -43,6 +43,7 @@ AddToFunc InitFunction		"I" Exec test -f $[HOME]/.fvwm/Pavillon_royal_de_France1
 +				"I" Exec upower
 #+				"I" Exec start-pulseaudio-x11
 +	  			"I" Exec pacmd load-module module-switch-on-port-available
++				"I" Exec bash -c "acpi_listen | grep --line-buffered \"^jack/headphone HEADPHONE unplug$\" | while read; do  playerctl pause; done"
 +				"I" Exec batt_check.sh
 +				"I" Exec gpsd udp://*:9803
 #+				"I" PipeRead 'echo -n "SetEnv "; gpg-agent --daemon|sed "s/; export GPG_AGENT_INFO;//g"'
