@@ -18,6 +18,7 @@
 *.cb
 *.cb2
 .*.lb
+*.fdb_latexmk
 
 ## Intermediate documents:
 *.dvi
