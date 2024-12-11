@@ -81,7 +81,7 @@ With argument, do this that many times."
  ;; If there is more than one, they won't work right.
  '(LaTeX-command "latexmk")
  '(package-selected-packages
-   '(nov markdown-mode cmake-mode web-server poker gited chess bluetooth bibretrieve biblio)))
+   '(yaml-mode nov markdown-mode cmake-mode web-server poker gited chess bluetooth bibretrieve biblio)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -122,15 +122,16 @@ With argument, do this that many times."
 
 (defun th-evince-sync (file linecol &rest ignored)
   (let* ((fname (un-urlify file))
-         (buf (find-file fname))
          (line (car linecol))
-         (col (cadr linecol)))
-    (if (null buf)
-        (message "[Synctex]: Could not open %s" fname)
-      (switch-to-buffer buf)
-      (goto-line (car linecol))
-      (unless (= col -1)
-        (move-to-column col)))))
+         (col (cadr linecol))
+	 (bufname (buffer-file-name)))
+    (when (string= fname bufname)
+      (goto-line line))))
+
+;;       (unless (= col -1)
+;;         (move-to-column col)
+;;	 )
+    
 
 (defvar *dbus-evince-signal* nil)
 
@@ -166,8 +167,10 @@ With argument, do this that many times."
                "org.gnome.evince.Daemon"  ; interface
                "FindDocument"
                (urlify pdffile)
-               t     ; Open a new window if the file is not opened.
+	       nil     ; Do NOT open a new window
+;;               t     ; Open a new window if the file is not opened.
                )))
+    (unless (string= dbus-name "")
     (dbus-call-method :session
           dbus-name
           "/org/gnome/evince/Window/0"
@@ -175,7 +178,7 @@ With argument, do this that many times."
           "SyncView"
           (urlify-escape-only texfile)
           (list :struct :int32 line :int32 1)
-  (utime))))
+  (utime)))))
 
 (defun auctex-evince-view ()
   (let ((pdf (file-truename (concat default-directory
