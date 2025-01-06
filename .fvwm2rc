@@ -185,8 +185,8 @@ Key XF86MonBrightnessDown A N	Exec brightnessctl s 10%-
 Key Space	A	4	Exec playerctl play-pause
 Key KP_Add	A	4	Exec playerctl position 10+
 Key KP_Subtract	A	4	Exec playerctl position 10-
-Key Prior	A	4	Exec playerctl previous
-Key Next	A	4	Exec playerctl next
+Key XF86AudioNext       A       N       Exec playerctl next
+Key XF86AudioPrev       A       N       Exec playerctl previous
 
 #Key Space	A	4	Exec quodlibet --play-pause
 #Key KP_Add	A	4	Exec quodlibet --seek +0:10
