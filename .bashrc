@@ -304,7 +304,7 @@ retrive_config_parameters () {
 
 pull_configuration () {
     retrive_config_parameters
-    git --git-dir=$config_dir/.git fetch $config_repository --all
+    git --git-dir=$config_dir/.git fetch $config_repository
 }
 
 diff_configuration () {
