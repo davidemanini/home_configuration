@@ -23,6 +23,10 @@ HISTFILESIZE=5000
 HISTSIZE=5000
 
 
+# colors for man
+export MANPAGER="less -R --use-color -Dd+r -Du+b"
+export MANROFFOPT="-P -c"
+
 # tty defaults
 export TERMIOS=`stty -g`
 
@@ -42,14 +46,21 @@ fi
 
 IFS=$'\n'
 
-#PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+
+# nicer
+PS1='\A \u@\h:\w\$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+#    PS1='\033[01m\A \033[01;31m\u\033(B\e[m@\033[01;32m\h\033(B\e[m:\033[01;34m\w\033(B\e[m\$ '
+#    PS1='\033[01m\A \033[01;31m\u\033[m@\033[01;32m\h\033[m:\033[01;34m\w\033[m\$ '
+    PS1='\[\033[01m\]\A \[\033[01;31m\]\u\[\033[m\]@\[\033[01;32m\]\h\[\033[m\]:\[\033[01;34m\]\w\[\033[m\]\$ '
+#    PS1='\[\033[01m\]\A \[\033[m\]\u@\h:\w$ '
     ;;
-*)
+linux|screen)
+    PS1='\[\033[01m\]\A \[\033[01;31m\]\u\[\033[m\]@\[\033[01;32m\]\h\[\033[m\]:\[\033[01;34m\]\w\[\033[m\]\$ '
     ;;
 esac
 
@@ -78,12 +89,17 @@ alias pst='ps -eH --forest'
 alias psu="ps --sort start_time -u $USER"
 alias psa='ps --sort start_time -A'
 alias psuw='psu w'
-alias c='cat'
+if test -x /usr/bin/batcat
+then
+    alias c='batcat'
+else
+    alias c='cat'
+fi
 alias d='ls -lBFh'
 alias e='echo'
 alias f='file'
 alias j='jobs'
-alias l='less -ML'
+alias l='less -MLR'
 if test -x /usr/bin/gio
 then
     alias o='gio open'
@@ -96,13 +112,17 @@ alias sr='screen -Dr'
 alias v='lesspipe'
 alias vl='less -M'
 alias cdb='cd $OLDPWD'
+
+alias diff='diff --color=always'
+
 alias dt='d -rt'
 alias da='d -a'
 alias dta='d -art'
 alias dat='d -art'
 alias ds='d -rS'
-#alias ds
-alias diff='diff --color=always'
+
+alias grep='grep --color=auto'
+
 alias meminfo='cat /proc/meminfo'
 alias bash='bash -ls'
 alias b64='base64'
@@ -149,8 +169,6 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 
-# nicer
-PS1='\A \u@\h:\w\$ '
 
 # for `lynx'
 export WWW_HOME='https://www.manini.cloud'
