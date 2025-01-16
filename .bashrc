@@ -23,8 +23,22 @@ HISTFILESIZE=5000
 HISTSIZE=5000
 
 
+# XDG file hierarchy
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_CONFIG_HOME=$HOME/.config
+
+export HISTFILE="$XDG_STATE_HOME"/bash/history
+
+# aliases for XDG
+
+alias alpine="alpine -p $XDG_CONFIG_HOME/alpine/pinerc"
+
+
+
 # colors for man
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
+export MANPAGER="less -R --use-color -Dd+r -Du+c"
 export MANROFFOPT="-P -c"
 
 # tty defaults

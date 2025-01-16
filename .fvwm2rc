@@ -27,6 +27,14 @@ SetEnv MAILER thunderbird
 SetEnv TERMINAL xterm
 SetEnv EDITOR "emacs -nw"
 
+# XDG file hierarchy
+
+SetEnv XDG_DATA_HOME $[HOME]/.local/share
+SetEnv XDG_STATE_HOME $[HOME]/.local/state
+SetEnv XDG_CACHE_HOME $[HOME]/.cache
+SetEnv XDG_CONFIG_HOME $[HOME]/.config
+
+
 
 ######################## Initialization Functions #############################
 AddToFunc InitOrRestart	 	"I" Module FvwmPager 0 0
