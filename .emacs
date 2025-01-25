@@ -81,7 +81,7 @@ With argument, do this that many times."
  ;; If there is more than one, they won't work right.
  '(LaTeX-command "latexmk")
  '(package-selected-packages
-   '(yaml-mode nov markdown-mode cmake-mode web-server poker gited chess bluetooth bibretrieve biblio)))
+   '(ample-theme gotham-theme dockerfile-mode yaml-mode markdown-mode cmake-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

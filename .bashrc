@@ -34,6 +34,7 @@ export HISTFILE="$XDG_STATE_HOME"/bash/history
 # aliases for XDG
 
 alias alpine="alpine -p $XDG_CONFIG_HOME/alpine/pinerc"
+alias dosbox="dosbox -conf $XDG_CONFIG_HOME/dosbox/dosbox.conf"
 
 
 
