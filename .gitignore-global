@@ -42,7 +42,7 @@
 
 ## SyncTeX
 *.synctex.gz
-
+*.synctex(busy)
 
 
 
