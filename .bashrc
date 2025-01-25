@@ -139,7 +139,6 @@ alias ds='d -rS'
 alias grep='grep --color=auto'
 
 alias meminfo='cat /proc/meminfo'
-alias bash='bash -ls'
 alias b64='base64'
 alias b64d='b64 -d'
 alias emacs='emacs -nw'
