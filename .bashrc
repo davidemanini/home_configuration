@@ -79,6 +79,27 @@ linux|screen)
     ;;
 esac
 
+
+# changing directory
+
+MAXDIRSTACK=5
+
+cd () {
+    pushd $@
+    if [[ ${#DIRSTACK[@]} -gt MAXDIRSTACK ]]
+    then
+	popd -0
+    fi
+}
+
+#alias cd="cd"
+alias cdb="pushd +1"
+#alias cdp="cd .."
+
+bind  '"\C-b": "\C-a\C-kcdb\C-m\C-y"'
+bind  '"\C-p": "\C-a\C-kcd ..\C-m\C-y"'
+
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -126,7 +147,6 @@ alias sd='screen -D'
 alias sr='screen -Dr'
 alias v='lesspipe'
 alias vl='less -M'
-alias cdb='cd $OLDPWD'
 
 alias diff='diff --color=always'
 
