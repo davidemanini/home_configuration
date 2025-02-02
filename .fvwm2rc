@@ -19,8 +19,8 @@
 # My variables
 
 
-#SetEnv PATH $[HOME]/bin:/usr/sbin:/usr/local/bin:/usr/bin:/usr/games
-SetEnv PATH $[HOME]/bin:$[PATH]
+SetEnv PATH $[HOME]/bin:/usr/local/bin:/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/games:/usr/games
+#SetEnv PATH $[HOME]/bin:$[PATH]
 SetEnv BROWSER firefox
 SetEnv WWW_HOME https://www.manini.cloud/
 SetEnv MAILER thunderbird
