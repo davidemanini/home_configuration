@@ -82,14 +82,20 @@ esac
 
 # changing directory
 
-MAXDIRSTACK=5
+MAXDIRSTACK=6
 
 cd () {
-    pushd $@
     if [[ ${#DIRSTACK[@]} -gt MAXDIRSTACK ]]
     then
 	popd -0
     fi
+    if [[ $# = 0 ]]
+    then
+	pushd ~/
+	return $?
+    fi
+    pushd $@
+    return $?    
 }
 
 #alias cd="cd"
