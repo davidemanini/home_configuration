@@ -90,7 +90,7 @@ case "$TERM" in
     ;;
 esac
 
-PS1="$__bold\A $__bold_red$USER$__normal@$__bold_green$HOSTNAME$__normal:$__bold_blue\w$__normal\$ "
+PS1="\[$__bold\]\A \[$__bold_red\]$USER\[$__normal\]@\[$__bold_green\]$HOSTNAME\[$__normal\]:\[$__bold_blue\]\w\[$__normal\]\$ "
 
 
 BASE_PRE_PROMPT=""
