@@ -63,21 +63,64 @@ IFS=$'\n'
 
 
 # nicer
+
 PS1='\A \u@\h:\w\$ '
+case "$TERM" in
+    xterm*|rxvt*|linux|screen)
+	__black="\033[30m"
+	__red="\033[31m"
+	__green="\033[32m"
+	__yellow="\033[33m"
+	__blue="\033[34m"
+	__magenta="\033[35m"
+	__cyan="\033[36m"
+	__white="\033[37m"
+	
+	__bold_black="\033[01;30m"
+	__bold_red="\033[01;31m"
+	__bold_green="\033[01;32m"
+	__bold_yellow="\033[01;33m"
+	__bold_blue="\033[01;34m"
+	__bold_magenta="\033[01;35m"
+	__bold_cyan="\033[01;36m"
+	__bold_white="\033[01;37m"
+	
+	__bold="\033[01m"
+	__normal="\033[m"
+    ;;
+esac
+
+PS1="$__bold\A $__bold_red$USER$__normal@$__bold_green$HOSTNAME$__normal:$__bold_blue\w$__normal\$ "
+
+
+BASE_PRE_PROMPT=""
+if [[ $SHLVL -gt 1 ]]
+then
+    BASE_PRE_PROMPT="$BASE_PRE_PROMPT""shlvl=$__cyan$SHLVL$__normal "
+fi
+if [[ -v CONTAINER_ID ]]
+then
+    BASE_PRE_PROMPT="$BASE_PRE_PROMPT""container=$__red$CONTAINER_ID$__normal "
+fi
+if [[ $BASE_PRE_PROMPT != "" ]]
+then
+   BASE_PRE_PROMPT="$BASE_PRE_PROMPT$__normal\n"
+fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-#    PS1='\033[01m\A \033[01;31m\u\033(B\e[m@\033[01;32m\h\033(B\e[m:\033[01;34m\w\033(B\e[m\$ '
-#    PS1='\033[01m\A \033[01;31m\u\033[m@\033[01;32m\h\033[m:\033[01;34m\w\033[m\$ '
-    PS1='\[\033[01m\]\A \[\033[01;31m\]\u\[\033[m\]@\[\033[01;32m\]\h\[\033[m\]:\[\033[01;34m\]\w\[\033[m\]\$ '
+    PROMPT_COMMAND='echo -ne "$BASE_PRE_PROMPT\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
 #    PS1='\[\033[01m\]\A \[\033[m\]\u@\h:\w$ '
     ;;
-linux|screen)
-    PS1='\[\033[01m\]\A \[\033[01;31m\]\u\[\033[m\]@\[\033[01;32m\]\h\[\033[m\]:\[\033[01;34m\]\w\[\033[m\]\$ '
-    ;;
+#linux|screen)
+#    PS1='\[\033[01m\]\A \[\033[01;31m\]\u\[\033[m\]@\[\033[01;32m\]\h\[\033[m\]:\[\033[01;34m\]\w\[\033[m\]\$ '
+#    ;;
+*)
+    PROMPT_COMMAND='echo -ne "$BASE_PRE_PROMPT"'
 esac
+
+
 
 
 # changing directory

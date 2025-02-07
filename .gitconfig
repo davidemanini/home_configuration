@@ -16,3 +16,11 @@
 	helper = store
 	username = git
 
+[color "status"]
+    branch = "bold magenta"
+    localBranch = "bold magenta"
+    remoteBranch = "bold blue"
+
+[color "branch"]
+    current = "bold magenta"
+    remote = "bold blue"
