@@ -1,7 +1,6 @@
 [core]
 	editor = emacs -nw
 	autocrlf = input
-	excludesfile = ~/.gitignore-global
 	autoSetupRemote = true
 
 [user]
