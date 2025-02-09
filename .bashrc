@@ -260,7 +260,7 @@ export WWW_HOME='https://www.manini.cloud'
 export TRASH_DIR=$HOME/Desktop/trash
 
 # load python defaults
-export PYTHONSTARTUP="$HOME/.pythonrc.py"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 
 # first things writen
 # clear
