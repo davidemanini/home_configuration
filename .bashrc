@@ -66,7 +66,7 @@ IFS=$'\n'
 
 PS1='\A \u@\h:\w\$ '
 case "$TERM" in
-    xterm*|rxvt*|linux|screen)
+    xterm*|rxvt*|linux|screen|foot)
 	__black="\033[30m"
 	__red="\033[31m"
 	__green="\033[32m"
@@ -109,7 +109,7 @@ fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|foot)
     PROMPT_COMMAND='echo -ne "$BASE_PRE_PROMPT\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
 #    PS1='\[\033[01m\]\A \[\033[m\]\u@\h:\w$ '
     ;;
