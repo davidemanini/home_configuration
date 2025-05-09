@@ -205,6 +205,14 @@ alias dta='d -art'
 alias dat='d -art'
 alias ds='d -rS'
 
+
+function du_ () {
+    du -h $@ | sort -h
+}
+
+alias du='du_'
+
+
 alias grep='grep --color=auto'
 
 alias meminfo='cat /proc/meminfo'
