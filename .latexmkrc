@@ -3,7 +3,7 @@
 $pdf_mode = 1;
 $pdf_previewer = 'xdg-open';
 
-$preview_continuous_mode = 1;
+$preview_mode = 1;
 $sleep_time = 0.1;
 
 $pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode';

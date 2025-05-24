@@ -3,7 +3,6 @@
 .\#*
 \#*\#
 
-
 ##### LaTeX #####
 # Core latex/pdflatex auxiliary files:
 *.aux
@@ -52,9 +51,13 @@
 
 
 
-##### Python #####
+##### Cache #####
 __pycache__
+.cache
 
+
+##### Meson #####
+build
 
 
 ##### Emacs TAGS #####
