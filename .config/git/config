@@ -2,6 +2,7 @@
 	editor = emacs -nw
 	autocrlf = input
 	autoSetupRemote = true
+#	pager = "/home/davide/bin/ov"
 
 [user]
 	name = Davide Manini
@@ -23,3 +24,10 @@
 [color "branch"]
     current = "bold magenta"
     remote = "bold blue"
+
+
+
+[pager]
+    diff = "/home/davide/bin/ov -F --section-delimiter '^diff' --section-header"
+#    log = "/home/davide/bin/ov -F --section-delimiter '^commit' --section-header-num 3"
+    show = "/home/davide/bin/ov -F --header 3"
