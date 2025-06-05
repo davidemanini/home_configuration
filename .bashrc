@@ -32,7 +32,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 
 # Cargo
 export CARGO_HOME=$XDG_DATA_HOME/cargo
-PATH="$CARGO_HOME:$PATH"
+PATH="$CARGO_HOME/bin:$PATH"
 
 export HISTFILE="$XDG_STATE_HOME"/bash/history
 
