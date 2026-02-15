@@ -6,7 +6,7 @@
 # for examples
 
 # my programs 
-PATH="~/bin:/sbin:/usr/sbin:/usr/local/bin:/bin:/usr/bin:/usr/local/games:/usr/games"
+PATH="~/bin:~/.local/bin:/sbin:/usr/sbin:/usr/local/bin:/bin:/usr/bin:/usr/local/games:/usr/games"
 #PATH="$HOME/bin:/usr/sbin:/sbin:$PATH"
 
 # If not running interactively, don't do anything
