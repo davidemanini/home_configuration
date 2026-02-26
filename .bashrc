@@ -217,13 +217,12 @@ function du_ () {
 
 alias du='du_'
 
-
 alias grep='grep --color=auto'
 
 alias meminfo='cat /proc/meminfo'
 alias b64='base64'
 alias b64d='b64 -d'
-alias emacs='emacs -nw'
+# alias emacs='emacs -nw'
 alias term="$TERMINAL"
 alias lynx="lynx -accept_all_cookies -cookie_file=~/.lynx_cookie -cookie_save_file=~/.lynx_cookie "
 alias resettty="stty $TERMIOS"
