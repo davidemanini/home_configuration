@@ -236,7 +236,10 @@ alias python='python3'
 alias latexcleanup='latexmk -C'
 #alias beatport2mp3="/shared_data/beatport2mp3/beatport2mp3_1.1/gui4linux.py"
 
-alias llms='run_llspy.sh'
+function ai () {
+    (sleep 1; firefox http://localhost:11434/)&
+    run_llspy.sh --serve 11434
+}
 
 # those have sense on mingw
 alias vst_compile="g++ -Wall -Os -s -c -mmmx -fmessage-length=0 -finline-functions -fno-exceptions -fno-rtti -I /e/vstsdk2.4 -I /e/vstsdk2.4/public.sdk/source/vst2.x/"
