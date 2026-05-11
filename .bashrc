@@ -55,6 +55,86 @@ export TERMIOS=`stty -g`
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+
+
+retrive_config_parameters () {
+    if [ -f $config_dir/parameters ]
+    then
+	. $config_dir/parameters
+    fi
+
+
+    if [ "$config_repository" = "" ]
+    then
+	config_repository=origin
+    fi
+    if [ "$config_branch" = "" ]
+    then
+	config_branch=master
+    fi
+
+    if [ -f $config_dir/config_commit ]
+    then
+	config_commit=`cat $config_dir/config_commit`
+    fi
+}
+
+
+
+### Handling API keys, mostly for AI
+load-api-keys() {
+    local secret_dir="$HOME/.password-store/apis"
+    local loaded=0
+    local ret=0
+
+    for secret_file in "$secret_dir"/*.gpg; do
+        [ -f "$secret_file" ] || continue
+
+        local pass_path="apis/$(basename "$secret_file" .gpg)"
+
+        local secret
+        secret=$(pass "$pass_path" 2) || {
+            echo "  [WARN] Failed to decrypt: $pass_path"
+	    ret=1
+            continue
+        }
+
+        # Validate KEY=VALUE format on line 1
+        local first_line
+        first_line=$(echo "$secret" | sed -n '1p')
+
+        if [[ ! "$first_line" =~ ^[A-Z_][A-Z0-9_]*=.+$ ]]; then
+            echo "  [WARN] Skipping $pass_path — line 1 is not in KEY=VALUE format"
+            continue
+        fi
+
+        export "$first_line"
+        echo "  [OK] Exported ${first_line%%=*}"
+        (( loaded++ ))
+    done
+
+    echo "$loaded secret(s) loaded into session"
+    if [ $ret = 0 ]
+    then
+	return 1
+    fi
+    return $ret
+}
+
+run-with-api-keys() {
+    (load-api-keys && $@)
+    return $?
+}
+
+_wrap_in_api_keys() {
+    alias $1="run-with-api-keys $1"
+}
+
+_wrap_in_api_keys agent
+_wrap_in_api_keys llms
+
+unset _wrap_in_api_keys
+
  
 
 # make less more friendly for non-text input files, see lesspipe(1)
