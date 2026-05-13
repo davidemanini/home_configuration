@@ -318,7 +318,7 @@ alias latexcleanup='latexmk -C'
 
 function ai () {
     (sleep 1; firefox http://localhost:11434/)&
-    run_llspy.sh --serve 11434
+    llms --serve 11434
 }
 
 # those have sense on mingw
