@@ -114,7 +114,7 @@ load-api-keys() {
     done
 
     echo "$loaded secret(s) loaded into session"
-    if [ $ret = 0 ]
+    if [ $loaded = 0 ]
     then
 	return 1
     fi
