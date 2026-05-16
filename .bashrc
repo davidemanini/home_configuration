@@ -316,6 +316,9 @@ alias python='python3'
 alias latexcleanup='latexmk -C'
 #alias beatport2mp3="/shared_data/beatport2mp3/beatport2mp3_1.1/gui4linux.py"
 
+alias zbarimg-from-clipboard='wl-paste -t image/png | zbarimg - | cut -b 9-'
+
+
 function ai () {
     (sleep 1; firefox http://localhost:11434/)&
     llms --serve 11434
