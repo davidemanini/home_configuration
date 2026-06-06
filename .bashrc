@@ -295,6 +295,32 @@ alias dat='d -art'
 alias ds='d -rS'
 
 
+g() {
+    if [[ $# -eq 0 ]]; then
+	command git status
+    else
+	command git "$@"
+    fi
+    return $?
+}
+
+# Aren't git completions already loaded
+source /usr/share/bash-completion/completions/git
+complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
+
+alias gco="git commit"
+alias gco-a="git commit -a"
+alias gbr="git branch"
+alias gdi="git diff"
+alias gldi="git-latex-diff"
+
+__git_complete gco git_commit
+__git_complete gco-a git_commit
+__git_complete gdi git_diff
+__git_complete gldi git_diff
+__git_complete latexdiff git_diff
+
+
 function du_ () {
     du -h $@ | sort -h
 }
