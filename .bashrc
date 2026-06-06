@@ -30,6 +30,9 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
 
 
+# HomeBrew
+PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+
 # Cargo
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 PATH="$CARGO_HOME/bin:$PATH"
